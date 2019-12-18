@@ -14,6 +14,7 @@ pod 'Firebase/Firestore'
 # Add the pod for Firebase Cloud Messaging
 pod 'Firebase/Messaging'
 pod 'Firebase/Auth'
+pod 'Firebase/Storage'
 pod 'razorpay-pod'
 pod 'IQKeyboardManagerSwift'
 end

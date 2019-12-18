@@ -32,6 +32,16 @@ class ProfileViewController: UIViewController {
         textFieldDeactive()
         updateLables()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        LogButton()
+        if firstname.text != ""{
+            let string = firstname.text!
+            
+            nameLetterLable.text = String(string.first!).uppercased()
+        }else {
+            nameLetterLable.text = "AA"
+        }
+    }
     
 
     @IBAction func editBtnPreessed(_ sender: UIButton) {

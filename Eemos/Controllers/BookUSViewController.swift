@@ -40,6 +40,10 @@ class BookUSViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
           activityView.stopAnimating()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        updateLables()
+        FillForm()
+    }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "loading" {
             
@@ -49,22 +53,25 @@ class BookUSViewController: UIViewController {
             } else {
                
                activityView.stopAnimating()
-                webView.evaluateJavaScript("document.getElementById('first_name').value = '\(firstname)';", completionHandler: { (res, error) -> Void in
-                                      //Here you can check for results if needed (res) or whether the execution was successful (error)
-                                  })
-                webView.evaluateJavaScript("document.getElementById('last_name').value = '\(lastname)';", completionHandler: { (res, error) -> Void in
-                                      //Here you can check for results if needed (res) or whether the execution was successful (error)
-                                  })
-                webView.evaluateJavaScript("document.getElementById('Email').value = '\(email)';", completionHandler: { (res, error) -> Void in
-                                                  //Here you can check for results if needed (res) or whether the execution was successful (error)
-                                              })
-                webView.evaluateJavaScript("document.getElementById('mobile_number').value = '\(mobile)';", completionHandler: { (res, error) -> Void in
-                                                  //Here you can check for results if needed (res) or whether the execution was successful (error)
-                                              })
                 
+                FillForm()
             }
         }
     }
-    
+    func FillForm(){
+        
+        webView.evaluateJavaScript("document.getElementById('first_name').value = '\(firstname)';", completionHandler: { (res, error) -> Void in
+                              //Here you can check for results if needed (res) or whether the execution was successful (error)
+                          })
+        webView.evaluateJavaScript("document.getElementById('last_name').value = '\(lastname)';", completionHandler: { (res, error) -> Void in
+                              //Here you can check for results if needed (res) or whether the execution was successful (error)
+                          })
+        webView.evaluateJavaScript("document.getElementById('Email').value = '\(email)';", completionHandler: { (res, error) -> Void in
+                                          //Here you can check for results if needed (res) or whether the execution was successful (error)
+                                      })
+        webView.evaluateJavaScript("document.getElementById('mobile_number').value = '\(mobile)';", completionHandler: { (res, error) -> Void in
+                                          //Here you can check for results if needed (res) or whether the execution was successful (error)
+                                      })
+    }
 
 }

@@ -19,9 +19,7 @@ class AboutUs : UIViewController {
         UIApplication.shared.open(URL(string:c.mapsURL)!, options: [:], completionHandler: nil)
     }
     
-    @IBAction func callButton(_ sender: Any) {
-        UIApplication.shared.open(URL(string: c.telURL)!, options: [:], completionHandler: nil)
-    }
+    
     
     @IBAction func facebook(_ sender: Any) {
         let facebookURL = URL(string: c.fbAppURL)!

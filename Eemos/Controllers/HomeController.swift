@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class HomeController : UIViewController{
-    
-    @IBOutlet weak var lableHight: NSLayoutConstraint!
+    var db : Firestore!
+   
+
     @IBOutlet weak var collectionview: UICollectionView!
     @IBOutlet weak var pageViewController: UIPageControl!
-    
-    @IBOutlet weak var Label: UILabel!
+  
     @IBOutlet weak var collectionView: UICollectionView!
     let c = AboutUsConstants.self
     var imgArr = [      UIImage(named:"special-offers1"),
@@ -26,40 +27,33 @@ class HomeController : UIViewController{
         
         var timer = Timer()
         var counter = 0
-        
+       
         override func viewDidLoad() {
             super.viewDidLoad()
-// lableHight.constant = 700
-            // create an NSMutableAttributedString that we'll append everything to
-            let fullString = NSMutableAttributedString(string: "Start of text\n\n")
-
-            // create our NSTextAttachment
-            let image1Attachment = NSTextAttachment()
-            image1Attachment.image = UIImage(named: "cidesco")
-
-            // wrap the attachment in its own attributed string so we can append it
-            let image1String = NSAttributedString(attachment: image1Attachment)
-
-            // add the NSTextAttachment wrapper to our full string, then add some more text.
-            fullString.append(image1String)
-            fullString.append(NSAttributedString(string: "\n\nEnd of textDescription :\n    The system gently cleanses and nourishes hair, leaving hair Feeling moisturized, beautiful & soft. It is also safe for colour treated hair and chemically treated hair. It can be used as everyday shampoo. Apply the eemos strengthening shampoo to wet hair gently massage in to scalp and work in to a lather. Rinse thoroughly from roots to tips. This shampoo is suited for all hair types. (Follow with eemos thickening shampoo)\n\nIngredients :\n    Aqua, Sodium Lauryl Ether Sulphate, Cocamidopropyl Betaine, Cocamide MEA, Ethylene Glycol Distearate, Perfume, Dimethicone, Sodium chloride, Disodium EDTA, Sodium Hydeoxide, Methylchloroisathiazolinone, Methylisothiazolinone.\n\nHow to use :\n    Apply on wet hair and gently massage in circle motion and rinse thoroughly.\n\nBenefits :\n • Eemos hair strengthening shampoo has mild cleansing effect and avoilds oily scalp.\n • It also nourishes and provide s strengthening  to hair.\n • It controls dry & frizziness.\n • It also helps in spilt correction\n • It is paraben free shampoo.\n • It is suitable for all hair types.\n • Target audience  men & women."))
-
-            // draw the result in a label
-//            Label.attributedText = fullString
-            
-           
-            
-            
+                    let settings = FirestoreSettings()
+                        Firestore.firestore().settings = settings
+                        db = Firestore.firestore()
             collectionview.dataSource = self // Add this
             collectionview.delegate = self // Add this
             Setcorners()
             pageViewController.numberOfPages = imgArr.count
             pageViewController.currentPage = 0
             DispatchQueue.main.async {
+                
                 self.timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
             }
+            setOfferImages()
         }
-
+  
+    override func viewWillDisappear(_ animated: Bool) {
+          super.viewWillDisappear(animated)
+          self.navigationController?.navigationBar.isHidden = false
+      }
+      override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
+          self.navigationController?.navigationBar.isHidden = true
+          
+      }
     
        @objc func changeImage() {
         
@@ -81,21 +75,171 @@ class HomeController : UIViewController{
 
     func Setcorners(){
     
-          collectionview.layer.cornerRadius = 8.0
-          collectionview.layer.shadowColor = UIColor.gray.cgColor
-          collectionview.layer.shadowOffset = CGSize(width: 0, height: 2)
-          collectionview.layer.shadowOpacity = 1
-          collectionview.layer.shadowRadius = 1.0
-          collectionview.layer.masksToBounds = false
+        collectionview.layer.cornerRadius = 8.0
+        collectionview.layer.shadowColor = UIColor.gray.cgColor
+        collectionview.layer.shadowOffset = CGSize(width: 0, height: 2)
+        collectionview.layer.shadowOpacity = 1
+        collectionview.layer.shadowRadius = 1.0
+        collectionview.layer.masksToBounds = false
         
     }
     
     @IBAction func callPressed(_ sender: UIButton) {
           UIApplication.shared.open(URL(string: c.telURL)!, options: [:], completionHandler: nil)
     }
+    
     @IBAction func whasappPressed(_ sender: UIButton) {
         UIApplication.shared.open((URL(string:c.whatsappURL)!), options: [:], completionHandler: nil)
     }
+
+    @IBAction func OffersPressd(_ sender: UIButton) {
+
+    }
+    
+    func setOfferImages(){
+        checkDBforChanges(){ (name) -> () in
+                       
+                       if name {
+                           if let array = UserDefaults.standard.object(forKey: "imagesArray") as? [String]{
+                               self.removeImageLocalPath(localPathName: array)
+                               UserDefaults.standard.removeObject(forKey: "imagesArray")
+                               UserDefaults.standard.synchronize()
+                               self.UpdateImages()
+                           }
+                       }else{
+                           if let retreivedImgArray = UserDefaults.standard.object(forKey: "imagesArray") {
+                               for path in retreivedImgArray as! [String]{
+                                   if let image = self.getSavedImage(named:  path) {
+                                       self.imgArr.append(image)
+                                      
+                                   }
+                                   self.collectionView.reloadData()
+                                   self.pageViewController.numberOfPages = self.imgArr.count
+                               }
+                               
+                           }else {
+                               self.UpdateImages()
+                           }
+
+                       }
+                       
+                   }
+                  
+    }
+    
+    func UpdateImages(){
+        let docRef = self.db.collection("BannerImages").document("images")
+        
+        docRef.getDocument { (document, error) in
+            
+            if let document = document, document.exists {
+                
+                let array = document.get("urls") as? [String] ?? [""]
+                var filename = 0
+                var userDefualt = [""]
+                
+                for arrayURL in array{
+                    filename += 1
+                    let url = URL(string: arrayURL)
+                    if  let data = try? Data(contentsOf: url!){
+                        if  self.saveImage(image: UIImage(data: data)!, fileName: "img\(filename)"){
+                            
+                            userDefualt.append("img\(filename)")
+                            if let image = self.getSavedImage(named:  "img\(filename)") {
+                                self.imgArr.append(image)
+                            
+                            }
+                            
+                        }
+                    }
+                    
+                }
+                self.collectionView.reloadData()
+                self.pageViewController.numberOfPages = self.imgArr.count
+                UserDefaults.standard.set(userDefualt, forKey: "imagesArray")
+                UserDefaults.standard.synchronize()
+                
+            } else {
+                
+                print("Document does not exist")
+            }
+            
+        }
+    }
+    
+    func checkDBforChanges( completion:@escaping (Bool) -> ()){
+        
+        let docRef = self.db.collection("BannerImages").document("update")
+              var update = false
+              docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    update = (document.get("update") as? Bool)!
+                  completion( update)
+                }
+              
+        }
+     
+    }
+    
+    
+    func saveImage(image: UIImage,fileName:String) -> Bool {
+        
+       
+        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
+            return false
+        }
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        do {
+            try data.write(to: directory.appendingPathComponent("\(fileName).png")!)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    func getSavedImage(named: String) -> UIImage? {
+        
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+    }
+    func removeImageLocalPath(localPathName:[String]) {
+        let fileMgr = FileManager()
+        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        
+        if let directoryContents = try? fileMgr.contentsOfDirectory(atPath: dirPath)
+        {
+            print("local--- \(localPathName)")
+            for path in directoryContents
+            {
+                print("paths-----\(path)")
+                let fullPath = (dirPath as NSString).appendingPathComponent(path)
+                do
+                {
+                    for local in localPathName{
+                        if path == local{
+                            try fileMgr.removeItem(atPath: fullPath)
+                            print("Files deleted")
+                        }else{
+                            print("no match")
+                        }
+                    }
+                    
+                    
+                }
+                catch let error as NSError
+                {
+                    print("Error deleting: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
+
 }
 
     extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {

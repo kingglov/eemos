@@ -57,7 +57,7 @@ struct Products {
     static let productNames = ["Thickening Hair Serum 100 ML",
                                "Thickening Hair Conditioner 230 ML",
                                "Thickening Hair Shampoo 230 ML"]
-    static let productPrices = ["₹ 200","₹ 230","₹ 200"]
+    static let productPrices = [" ₹ 200"," ₹ 230"," ₹ 200"]
     static let productPrice = ["200","230","200"]
 }
 

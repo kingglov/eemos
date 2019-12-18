@@ -10,7 +10,9 @@
 		A503584B23879EEC00383F1C /* BuyProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A503584A23879EEC00383F1C /* BuyProductsViewController.swift */; };
 		A50B5FA423A0A6980045463C /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B5FA323A0A6980045463C /* TableViewCells.swift */; };
 		A50BBA1E238F8FC2009156F3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50BBA1D238F8FC2009156F3 /* ProfileViewController.swift */; };
+		A50C74A923AA43A7004B6E8E /* AcadamyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C74A823AA43A7004B6E8E /* AcadamyViewController.swift */; };
 		A525A0F22386535700A4B729 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A525A0F12386535700A4B729 /* GoogleService-Info.plist */; };
+		A54A29A123A75B5A0006C250 /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A29A023A75B5A0006C250 /* OffersViewController.swift */; };
 		A587B22823853403006313ED /* BookUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587B22723853403006313ED /* BookUSViewController.swift */; };
 		A58D4C6F238CEDB9002828D8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D4C6E238CEDB9002828D8 /* LoginViewController.swift */; };
 		A58D4C77238D5518002828D8 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D4C76238D5518002828D8 /* SignupViewController.swift */; };
@@ -40,7 +42,9 @@
 		A503584A23879EEC00383F1C /* BuyProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyProductsViewController.swift; sourceTree = "<group>"; };
 		A50B5FA323A0A6980045463C /* TableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 		A50BBA1D238F8FC2009156F3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A50C74A823AA43A7004B6E8E /* AcadamyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcadamyViewController.swift; sourceTree = "<group>"; };
 		A525A0F12386535700A4B729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A54A29A023A75B5A0006C250 /* OffersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewController.swift; sourceTree = "<group>"; };
 		A587B22723853403006313ED /* BookUSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookUSViewController.swift; sourceTree = "<group>"; };
 		A58D4C6E238CEDB9002828D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A58D4C76238D5518002828D8 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 				A58D4C6E238CEDB9002828D8 /* LoginViewController.swift */,
 				A58D4C76238D5518002828D8 /* SignupViewController.swift */,
 				A50BBA1D238F8FC2009156F3 /* ProfileViewController.swift */,
+				A54A29A023A75B5A0006C250 /* OffersViewController.swift */,
+				A50C74A823AA43A7004B6E8E /* AcadamyViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -318,8 +324,10 @@
 				CE5CF1C623753D5500174A45 /* ProductsInfoController.swift in Sources */,
 				A503584B23879EEC00383F1C /* BuyProductsViewController.swift in Sources */,
 				CE2379552373D11D0095AD33 /* ServicesInfoController.swift in Sources */,
+				A50C74A923AA43A7004B6E8E /* AcadamyViewController.swift in Sources */,
 				CE937275232FA5760086F3B7 /* AppDelegate.swift in Sources */,
 				CEEDB76A237D35B1003E0BC2 /* ServicesInfoTebleView.swift in Sources */,
+				A54A29A123A75B5A0006C250 /* OffersViewController.swift in Sources */,
 				CEC6F6622334E23100572D49 /* HomeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

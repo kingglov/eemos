@@ -25,5 +25,9 @@ class CollectionViewCell:UICollectionViewCell{
     }
    
     }
+class offersTableViewCell : UITableViewCell{
+    
+    @IBOutlet weak var imageview: UIImageView!
+}
 
 
