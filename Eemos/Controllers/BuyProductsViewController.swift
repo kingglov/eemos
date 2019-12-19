@@ -169,10 +169,10 @@ class BuyProductsViewController: UIViewController , UITextViewDelegate,RazorpayP
     func payWithRazorPay(){
        
          let options: [String:Any] = [
-            "amount" : "\(Int(price)! * 10)", //mandatory in paise like:- 1000 paise ==  10 rs
+            "amount" : "\(Int(price)! * 100)", //mandatory in paise like:- 1000 paise ==  10 rs
                          "description": "purchase description",
                          "image": "1",
-                         "name": "Eemose BueTY & Spa",
+                         "name": "Eemos Beauty Parlor & Acadamy",
                          "prefill": [
                             "contact": "\(mobile.text!)",
                             "email": "\(email.text!)"

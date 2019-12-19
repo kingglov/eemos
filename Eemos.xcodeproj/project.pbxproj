@@ -13,6 +13,7 @@
 		A50C74A923AA43A7004B6E8E /* AcadamyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50C74A823AA43A7004B6E8E /* AcadamyViewController.swift */; };
 		A525A0F22386535700A4B729 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A525A0F12386535700A4B729 /* GoogleService-Info.plist */; };
 		A54A29A123A75B5A0006C250 /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A29A023A75B5A0006C250 /* OffersViewController.swift */; };
+		A55ECDED23AB274D00292EB0 /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55ECDEC23AB274D00292EB0 /* StoriesViewController.swift */; };
 		A587B22823853403006313ED /* BookUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587B22723853403006313ED /* BookUSViewController.swift */; };
 		A58D4C6F238CEDB9002828D8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D4C6E238CEDB9002828D8 /* LoginViewController.swift */; };
 		A58D4C77238D5518002828D8 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D4C76238D5518002828D8 /* SignupViewController.swift */; };
@@ -45,6 +46,7 @@
 		A50C74A823AA43A7004B6E8E /* AcadamyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcadamyViewController.swift; sourceTree = "<group>"; };
 		A525A0F12386535700A4B729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A54A29A023A75B5A0006C250 /* OffersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewController.swift; sourceTree = "<group>"; };
+		A55ECDEC23AB274D00292EB0 /* StoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
 		A587B22723853403006313ED /* BookUSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookUSViewController.swift; sourceTree = "<group>"; };
 		A58D4C6E238CEDB9002828D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A58D4C76238D5518002828D8 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				A50BBA1D238F8FC2009156F3 /* ProfileViewController.swift */,
 				A54A29A023A75B5A0006C250 /* OffersViewController.swift */,
 				A50C74A823AA43A7004B6E8E /* AcadamyViewController.swift */,
+				A55ECDEC23AB274D00292EB0 /* StoriesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55ECDED23AB274D00292EB0 /* StoriesViewController.swift in Sources */,
 				A58D4C6F238CEDB9002828D8 /* LoginViewController.swift in Sources */,
 				CE8933BE2333BD5D00DA1CDF /* AboutUS.swift in Sources */,
 				CE76B3D4237E5E34008B8E5E /* DataConstants.swift in Sources */,

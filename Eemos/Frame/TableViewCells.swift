@@ -29,5 +29,38 @@ class offersTableViewCell : UITableViewCell{
     
     @IBOutlet weak var imageview: UIImageView!
 }
+class StoriesTableViewCell : UITableViewCell{
+    @IBOutlet weak var paraLabel: UILabel!
+    
+    @IBOutlet weak var imageview: UIImageView!
+    @IBOutlet weak var headingLable: UILabel!
+    @IBOutlet weak var readMorebtn: UIButton!
+    var heightConstraint = NSLayoutConstraint()
+     var hide = true
+    override func awakeFromNib() {
+              super.awakeFromNib()
+             self.heightConstraint = NSLayoutConstraint(item: self.paraLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 200)
+                 NSLayoutConstraint.activate([ heightConstraint])
+          }
+    
+  
+    @IBAction func readMorepressed(_ sender: UIButton) {
+        
+        print(sender.tag)
+        print(paraLabel.tag)
 
+    }
+    func maintainConstrainsTrue(){
+          UIView.animate(withDuration: 10.0) {
+           NSLayoutConstraint.activate([ self.heightConstraint])
+                 }
+        
+    }
+    func maintainConstrainsFalse(){
+        UIView.animate(withDuration: 10.0) {
+            self.heightConstraint.isActive = false
+               }
+       
+    }
+}
 
