@@ -704,7 +704,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="94" id="3Fe-Bo-A9q"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

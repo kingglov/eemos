@@ -29,6 +29,8 @@ class offersTableViewCell : UITableViewCell{
     
     @IBOutlet weak var imageview: UIImageView!
 }
+
+
 class StoriesTableViewCell : UITableViewCell{
     @IBOutlet weak var paraLabel: UILabel!
     
@@ -51,12 +53,14 @@ class StoriesTableViewCell : UITableViewCell{
 
     }
     func maintainConstrainsTrue(){
+        readMorebtn.setTitle("Read more", for: .normal)
           UIView.animate(withDuration: 10.0) {
            NSLayoutConstraint.activate([ self.heightConstraint])
                  }
         
     }
     func maintainConstrainsFalse(){
+        readMorebtn.setTitle("Read less", for: .normal)
         UIView.animate(withDuration: 10.0) {
             self.heightConstraint.isActive = false
                }
