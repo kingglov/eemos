@@ -170,9 +170,8 @@ class BuyProductsViewController: UIViewController , UITextViewDelegate,RazorpayP
        
          let options: [String:Any] = [
             "amount" : "\(Int(price)! * 100)", //mandatory in paise like:- 1000 paise ==  10 rs
-                         "description": "purchase description",
-                         "image": "1",
-                         "name": "Eemos Beauty Parlor & Acadamy",
+                         "description": item,
+                         "name": "Eemos Beauty Parlor & Spa",
                          "prefill": [
                             "contact": "\(mobile.text!)",
                             "email": "\(email.text!)"

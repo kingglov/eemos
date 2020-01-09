@@ -9,13 +9,16 @@
 import UIKit
 import FirebaseAuth
 import FirebaseCore
+import Firebase
+import GoogleSignIn
 import FirebaseFirestore
 class LoginViewController: UIViewController {
-    
+      var window: UIWindow?
     @IBOutlet weak var statusLable: UILabel!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var trailing: NSLayoutConstraint!
+ 
     var db : Firestore!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +45,15 @@ class LoginViewController: UIViewController {
        }
     
     @IBAction func skipPressed(_ sender: UIButton) {
-        
+            
           UserDefaults.standard.set("SkipPressed", forKey: "Skip")
+        UserDefaults.standard.synchronize()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+              let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+              let viewController = storyboard.instantiateViewController(withIdentifier: "tabbar") as! ViewController
+              
+              self.window?.rootViewController = viewController
+              self.window?.makeKeyAndVisible()
         self.performSegue(withIdentifier: "idd", sender: nil)
     }
     
@@ -64,6 +74,12 @@ class LoginViewController: UIViewController {
                             UserDefaults.standard.set(document.get("mobile") as? String ?? "", forKey: "mobile")
                             UserDefaults.standard.set(document.get("lname") as? String ?? "", forKey: "lname")
                             UserDefaults.standard.synchronize()
+                            self.window = UIWindow(frame: UIScreen.main.bounds)
+                            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                            let viewController = storyboard.instantiateViewController(withIdentifier: "tabbar") as! ViewController
+                            
+                            self.window?.rootViewController = viewController
+                            self.window?.makeKeyAndVisible()
                         } else {
                             
                             print("Document does not exist")
@@ -85,6 +101,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signinGoogle(_ sender: UIButton) {
+         GIDSignIn.sharedInstance()?.presentingViewController = self
+         GIDSignIn.sharedInstance().signIn()
     }
     @IBAction func signinwtFB(_ sender: UIButton) {
     }

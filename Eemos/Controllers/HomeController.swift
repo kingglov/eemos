@@ -18,31 +18,41 @@ class HomeController : UIViewController{
   
     @IBOutlet weak var collectionView: UICollectionView!
     let c = AboutUsConstants.self
-    var imgArr = [      UIImage(named:"special-offers1"),
-                        UIImage(named:"acadamy2") ,
-                        UIImage(named:"acadamy") ,
-                        UIImage(named:"products") ,
-                        UIImage(named:"flat20") ,
-                        UIImage(named:"cidesco")  ]
+    var imgArr = Home.imgArr
         
         var timer = Timer()
         var counter = 0
        
         override func viewDidLoad() {
             super.viewDidLoad()
+            // Firebase settings
                     let settings = FirestoreSettings()
                         Firestore.firestore().settings = settings
                         db = Firestore.firestore()
-            collectionview.dataSource = self // Add this
-            collectionview.delegate = self // Add this
+            
+            collectionview.dataSource = self
+            collectionview.delegate = self
+            
+            //set corners of collectionView
             Setcorners()
+            
+            // pageViewController config
             pageViewController.numberOfPages = imgArr.count
             pageViewController.currentPage = 0
+            
+            // change banner images
             DispatchQueue.main.async {
                 
                 self.timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
             }
-            setOfferImages()
+            
+            //Modify Banner Images
+            if (UserDefaults.standard.object(forKey: "imagesArrayDownload") as? String) != nil{
+                 setOfferImages()
+            }else{
+               UpdateImages()
+            }
+            
         }
   
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,6 +65,7 @@ class HomeController : UIViewController{
           
       }
     
+    // to change banner images for time interval
        @objc func changeImage() {
         
         if counter < imgArr.count {
@@ -73,6 +84,7 @@ class HomeController : UIViewController{
             
         }
 
+    // Sets corners for collectionView
     func Setcorners(){
     
         collectionview.layer.cornerRadius = 8.0
@@ -84,10 +96,12 @@ class HomeController : UIViewController{
         
     }
     
+    // To call the eemos
     @IBAction func callPressed(_ sender: UIButton) {
           UIApplication.shared.open(URL(string: c.telURL)!, options: [:], completionHandler: nil)
     }
     
+    // to open eemos whatsapp chat
     @IBAction func whasappPressed(_ sender: UIButton) {
         UIApplication.shared.open((URL(string:c.whatsappURL)!), options: [:], completionHandler: nil)
     }
@@ -96,7 +110,10 @@ class HomeController : UIViewController{
 
     }
     
+    // Set offer images retrived from userDefaults
     func setOfferImages(){
+        
+        //checks any changes in DB
         checkDBforChanges(){ (name) -> () in
                        
                        if name {
@@ -127,6 +144,7 @@ class HomeController : UIViewController{
                   
     }
     
+    // download the banner images from DB and strores it into userdefualts
     func UpdateImages(){
         let docRef = self.db.collection("BannerImages").document("images")
         
@@ -157,6 +175,7 @@ class HomeController : UIViewController{
                 self.collectionView.reloadData()
                 self.pageViewController.numberOfPages = self.imgArr.count
                 UserDefaults.standard.set(userDefualt, forKey: "imagesArray")
+                UserDefaults.standard.set("userDefualt", forKey: "imagesArrayDownload")
                 UserDefaults.standard.synchronize()
                 
             } else {
@@ -167,13 +186,22 @@ class HomeController : UIViewController{
         }
     }
     
+    //Checks database for any changes . change the update key to true in DB to get update
     func checkDBforChanges( completion:@escaping (Bool) -> ()){
         
         let docRef = self.db.collection("BannerImages").document("update")
+             var currentupdate = ""
               var update = false
               docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
-                    update = (document.get("update") as? Bool)!
+                    currentupdate = (document.get("update") as? String)!
+                    if let currentUpadte =   UserDefaults.standard.object(forKey: "CurrentUpdate") as? String{
+                        if currentupdate == currentUpadte{
+                            update = false
+                        }else {
+                            update = true
+                        }
+                    }
                   completion( update)
                 }
               
@@ -181,7 +209,7 @@ class HomeController : UIViewController{
      
     }
     
-    
+    // save images to local storage (sandbox)
     func saveImage(image: UIImage,fileName:String) -> Bool {
         
        
@@ -200,6 +228,7 @@ class HomeController : UIViewController{
         }
     }
     
+    // To get saved images from sandbox
     func getSavedImage(named: String) -> UIImage? {
         
         if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
@@ -207,6 +236,8 @@ class HomeController : UIViewController{
         }
         return nil
     }
+    
+    // Remove the images from sandbox
     func removeImageLocalPath(localPathName:[String]) {
         let fileMgr = FileManager()
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]

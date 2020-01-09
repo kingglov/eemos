@@ -17,5 +17,6 @@ pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'razorpay-pod'
 pod 'IQKeyboardManagerSwift'
+pod 'GoogleSignIn'
 end
  

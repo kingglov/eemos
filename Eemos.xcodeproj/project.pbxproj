@@ -17,6 +17,7 @@
 		A587B22823853403006313ED /* BookUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587B22723853403006313ED /* BookUSViewController.swift */; };
 		A58D4C6F238CEDB9002828D8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D4C6E238CEDB9002828D8 /* LoginViewController.swift */; };
 		A58D4C77238D5518002828D8 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D4C76238D5518002828D8 /* SignupViewController.swift */; };
+		A5A1437623B08E6800012CE7 /* BlogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1437523B08E6800012CE7 /* BlogsViewController.swift */; };
 		A9BA4D463EF0174905D15F4F /* Pods_Eemos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A113B8BBE1E3B4FC34CF481 /* Pods_Eemos.framework */; };
 		CE2379552373D11D0095AD33 /* ServicesInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2379542373D11D0095AD33 /* ServicesInfoController.swift */; };
 		CE30F5E72339140F00C60E83 /* ServicesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30F5E62339140F00C60E83 /* ServicesTableViewCell.swift */; };
@@ -50,6 +51,7 @@
 		A587B22723853403006313ED /* BookUSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookUSViewController.swift; sourceTree = "<group>"; };
 		A58D4C6E238CEDB9002828D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A58D4C76238D5518002828D8 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		A5A1437523B08E6800012CE7 /* BlogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogsViewController.swift; sourceTree = "<group>"; };
 		CE2379542373D11D0095AD33 /* ServicesInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesInfoController.swift; sourceTree = "<group>"; };
 		CE30F5E62339140F00C60E83 /* ServicesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTableViewCell.swift; sourceTree = "<group>"; };
 		CE30F5E8233918C200C60E83 /* Services Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services Controller.swift"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				A50BBA1D238F8FC2009156F3 /* ProfileViewController.swift */,
 				A54A29A023A75B5A0006C250 /* OffersViewController.swift */,
 				A50C74A823AA43A7004B6E8E /* AcadamyViewController.swift */,
+				A5A1437523B08E6800012CE7 /* BlogsViewController.swift */,
 				A55ECDEC23AB274D00292EB0 /* StoriesViewController.swift */,
 			);
 			path = Controllers;
@@ -206,6 +209,7 @@
 				CE93726E232FA5750086F3B7 /* Frameworks */,
 				CE93726F232FA5750086F3B7 /* Resources */,
 				E42D7D22F70C7923047CBDDE /* [CP] Embed Pods Frameworks */,
+				67CC93453345C0E4A3772D03 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -286,6 +290,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		67CC93453345C0E4A3772D03 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Eemos/Pods-Eemos-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Eemos/Pods-Eemos-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Eemos/Pods-Eemos-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E42D7D22F70C7923047CBDDE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,6 +349,7 @@
 				CE5CF1C623753D5500174A45 /* ProductsInfoController.swift in Sources */,
 				A503584B23879EEC00383F1C /* BuyProductsViewController.swift in Sources */,
 				CE2379552373D11D0095AD33 /* ServicesInfoController.swift in Sources */,
+				A5A1437623B08E6800012CE7 /* BlogsViewController.swift in Sources */,
 				A50C74A923AA43A7004B6E8E /* AcadamyViewController.swift in Sources */,
 				CE937275232FA5760086F3B7 /* AppDelegate.swift in Sources */,
 				CEEDB76A237D35B1003E0BC2 /* ServicesInfoTebleView.swift in Sources */,

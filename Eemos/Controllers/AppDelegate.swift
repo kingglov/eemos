@@ -1,16 +1,22 @@
 import UIKit
 import UserNotifications
 import Firebase
+import GoogleSignIn
 import IQKeyboardManagerSwift
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-   
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+  
+  
   var window: UIWindow?
   let gcmMessageIDKey = "gcm.message_id"
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
    
+    FirebaseApp.configure()
+    GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+    GIDSignIn.sharedInstance().delegate = self
+    
     if let _ = UserDefaults.standard.object(forKey: "Skip"){ 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -19,12 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = viewController
         self.window?.makeKeyAndVisible()
     }
-//    if let _ = UserDefaults.standard.object(forKey: "user_uid_key"){
-//        
-//    }
+
     
     IQKeyboardManager.shared.enable = true
-    FirebaseApp.configure()
     Auth.auth().addStateDidChangeListener { (_, user) in
         if user != nil {
             // user is already logged in
@@ -36,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
         } else {
             // user is not logged in
-            print("***********************************Not logged In")
+           
         }
     }
     // [START set_messaging_delegate]
@@ -64,7 +67,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [END register_for_notifications]
     return true
   }
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        // ...
+        if let error = error {
+          // ...
+          print(error)
+          return
+        }
 
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                          accessToken: authentication.accessToken)
+          
+          print(credential)
+          Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+              // ...
+              return
+            }else {
+                print(authResult?.user.displayName!)
+                print(authResult?.user.email)
+                print(authResult?.user.phoneNumber)
+                
+                UserDefaults.standard.set(authResult?.user.uid, forKey: "user_uid_key")
+                UserDefaults.standard.set(authResult?.user.displayName ?? "", forKey: "fname")
+                UserDefaults.standard.set(authResult?.user.email ?? "", forKey: "email")
+                UserDefaults.standard.set(authResult?.user.phoneNumber ?? "", forKey: "mobile")
+                UserDefaults.standard.set( "", forKey: "lname")
+                UserDefaults.standard.synchronize()
+              }
+            // User is signed in
+            // ...
+          }
+        // ...
+      }
+
+      func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+          // Perform any operations when the user disconnects from app here.
+          // ...
+      }
+    
+      
+     @available(iOS 9.0, *)
+     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+       -> Bool {
+       return GIDSignIn.sharedInstance().handle(url)
+     }
+      func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+          return GIDSignIn.sharedInstance().handle(url)
+      }
   // [START receive_message]
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
     // If you are receiving a notification message while your app is in the background,

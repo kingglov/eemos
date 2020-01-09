@@ -8,23 +8,27 @@
 
 import UIKit
 
-class AcadamyViewController: UIViewController {
+class AcadamyViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+    
+    
 
     @IBOutlet weak var stdlbl: UILabel!
-    @IBOutlet weak var textView: UITextView!
-   
+    @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var freelancersLbl: UILabel!
     @IBOutlet weak var employeeslbl: UILabel!
     @IBOutlet weak var entrepreurLbl: UILabel!
-        let text = "\nBeauty Parlour Courses in Tirupati \n\n • Basic Beauty Course \n • Advance Beauty Course \n • Professional Beauty Course Hair \n • Dressing Course \n • Makeup Course" as NSString
-    
+        
+    let textArray = AcadamyCon.textArray
+
+    let imagesArray = AcadamyCon.imagesArray
+    let headingArray = AcadamyCon.imagesArray
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textView.attributedText = attributedText(string: text)
+//        textView.attributedText = attributedText(string: text)
     }
     override func viewDidAppear(_ animated: Bool) {
-    incrementLabel(to: 70)
+    incrementLabel(to: 151)
     }
     func incrementLabel(to endValue: Int) {
         
@@ -35,19 +39,19 @@ class AcadamyViewController: UIViewController {
                     usleep(sleepTime)
                     DispatchQueue.main.async {
                         
-                        if i <= 10 {
+                        if i <= 20 {
                             self.freelancersLbl.text = "\(i)+"
                             self.employeeslbl.text = "\(i)+"
                             self.entrepreurLbl.text = "\(i)+"
                             self.stdlbl.text = "\(i)+"
-                        }else if i <= 20 {
+                        }else if i <= 31 {
                             self.employeeslbl.text = "\(i)+"
                             self.entrepreurLbl.text = "\(i)+"
                             self.stdlbl.text = "\(i)+"
-                        }else if i <= 25 {
+                        }else if i <= 85 {
                             self.stdlbl.text = "\(i)+"
                             self.entrepreurLbl.text = "\(i)+"
-                        }else if i <= 70 {
+                        }else if i <= 150 {
                             self.stdlbl.text = "\(i)+"
                         }
                         
@@ -64,24 +68,37 @@ class AcadamyViewController: UIViewController {
     }
     
     
-    func attributedText(string:NSString) -> NSAttributedString {
+    func attributedText(index:IndexPath) -> NSAttributedString {
+        
+        let string = textArray[index.row]
+        let boldString = headingArray[index.row]
+        
         let style = NSMutableParagraphStyle()
                style.alignment = .left
                style.headIndent = 19
-        let attributedString = NSMutableAttributedString(string: string as String, attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 22.0)])
+        let attributedString = NSMutableAttributedString(string: string as String, attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 18.0)])
         
-        let boldFontAttribute1 = [NSAttributedString.Key.paragraphStyle :style]
-
-        
-        let boldFontAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22.0)]
+        let boldFontAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24.0)]
 
         // Part of string to be bold
     
-        attributedString.addAttributes(boldFontAttribute, range: string.range(of: "Beauty Parlour Courses in Tirupati"))
+        attributedString.addAttributes(boldFontAttribute, range: string.range(of: boldString))
        
-            attributedString.addAttributes(boldFontAttribute1, range: string.range(of: "\n • Basic Beauty Course \n • Advance Beauty Course \n • Professional Beauty Course Hair \n • Dressing Course \n • Makeup Course"))
+            
        
        
         return attributedString
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return imagesArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let  cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AcadamyTableViewCell
+        
+        cell.label.attributedText = attributedText(index: indexPath)
+        cell.imageview.image = UIImage(named: imagesArray[indexPath.row])
+        return cell
     }
 }

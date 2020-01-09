@@ -9,9 +9,25 @@
 import UIKit
 
 class AboutUs : UIViewController {
+    @IBOutlet weak var trxtViewHight: NSLayoutConstraint!
     
+    @IBOutlet weak var circleCardwidth: NSLayoutConstraint!
+    @IBOutlet weak var circleCardHight: NSLayoutConstraint!
+    @IBOutlet weak var aboutusHeader: AboutUsHeader!
     let c = AboutUsConstants.self
     override func viewDidLoad() {
+        let hight = self.view.frame.height - trxtViewHight.constant
+        if hight > 600 {
+            circleCardHight.constant = 300
+            circleCardwidth.constant = 300
+        }else if hight > 400{
+            circleCardHight.constant = 180
+            circleCardwidth.constant = 180
+            
+        }else if hight > 250{
+            circleCardHight.constant = 150
+            circleCardwidth.constant = 150
+        }
         
     }
     

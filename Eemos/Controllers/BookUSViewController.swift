@@ -12,7 +12,7 @@ import NVActivityIndicatorView
 class BookUSViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
-    
+    @IBOutlet weak var statusLablr: UILabel!
     @IBOutlet weak var activityView: NVActivityIndicatorView!
    
    var firstname = ""
@@ -38,6 +38,7 @@ class BookUSViewController: UIViewController {
           
     }
     override func viewWillDisappear(_ animated: Bool) {
+        statusLablr.isHidden = true
           activityView.stopAnimating()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -49,10 +50,12 @@ class BookUSViewController: UIViewController {
             
             if webView.isLoading {
                activityView.startAnimating()
+                statusLablr.isHidden = false
                 activityView.isHidden = false
             } else {
                
                activityView.stopAnimating()
+                statusLablr.isHidden = true
                 
                 FillForm()
             }
