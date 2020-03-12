@@ -81,13 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
           
           print(credential)
           Auth.auth().signIn(with: credential) { (authResult, error) in
-            if let error = error {
+            if let _ = error {
               // ...
               return
             }else {
-                print(authResult?.user.displayName!)
-                print(authResult?.user.email)
-                print(authResult?.user.phoneNumber)
+            
                 
                 UserDefaults.standard.set(authResult?.user.uid, forKey: "user_uid_key")
                 UserDefaults.standard.set(authResult?.user.displayName ?? "", forKey: "fname")

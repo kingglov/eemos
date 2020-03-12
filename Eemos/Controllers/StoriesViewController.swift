@@ -74,9 +74,9 @@ class StoriesViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func attributedText(indexPath : String) -> NSAttributedString {
         
         
-        let attributedString = NSMutableAttributedString(string: indexPath , attributes: [NSAttributedString.Key.font:UIFont(name: "Palatino-Bold", size: 20)])
+        let attributedString = NSMutableAttributedString(string: indexPath , attributes: [NSAttributedString.Key.font:UIFont(name: "Palatino-Bold", size: 20) as Any])
         
-        let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: 18)]
+        let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: 18) as Any]
         let nsString = indexPath as NSString
         // Part of string to be bold
         attributedString.addAttributes(boldFontAttribute, range: nsString.range(of: indexPath))
@@ -95,7 +95,7 @@ class StoriesViewController: UIViewController,UITableViewDelegate,UITableViewDat
         style1.headIndent = 15
         
         let attributedString = NSMutableAttributedString(string: string
-            , attributes: [NSAttributedString.Key.font:UIFont(name: "Palatino", size: 18),NSAttributedString.Key.paragraphStyle :style])
+            , attributes: [NSAttributedString.Key.font:UIFont(name: "Palatino", size: 18) as Any,NSAttributedString.Key.paragraphStyle :style])
         
         let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Palatino-Bold", size: 18),NSAttributedString.Key.paragraphStyle : style1]
         

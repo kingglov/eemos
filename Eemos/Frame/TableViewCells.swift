@@ -41,7 +41,7 @@ class StoriesTableViewCell : UITableViewCell{
      var hide = true
     override func awakeFromNib() {
               super.awakeFromNib()
-             self.heightConstraint = NSLayoutConstraint(item: self.paraLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 200)
+             self.heightConstraint = NSLayoutConstraint(item: self.paraLabel as Any, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 200)
                  NSLayoutConstraint.activate([ heightConstraint])
           }
     
@@ -78,7 +78,7 @@ class BlogTableViewCell : UITableViewCell{
      var hide = true
     override func awakeFromNib() {
               super.awakeFromNib()
-             self.heightConstraint = NSLayoutConstraint(item: self.paraLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 200)
+             self.heightConstraint = NSLayoutConstraint(item: self.paraLabel as Any, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 200)
                  NSLayoutConstraint.activate([ heightConstraint])
           }
     

@@ -32,9 +32,9 @@ class LoginViewController: UIViewController {
         
         statusLable.text = ""
         
-        if UserDefaults.standard.object(forKey: "user_uid_key") != nil {
-            performSegue(withIdentifier: "idd", sender: nil)
-        }
+//        if UserDefaults.standard.object(forKey: "user_uid_key") != nil {
+//            performSegue(withIdentifier: "idd", sender: nil)
+//        }
            UIView.animate(withDuration: 1) {
                self.trailing.constant = 80
                self.view.layoutIfNeeded()
